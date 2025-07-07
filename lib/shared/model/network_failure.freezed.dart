@@ -55,14 +55,15 @@ extension NetworkFailurePatterns on NetworkFailure {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NoInternet value)?  noInternet,TResult Function( _ServerError value)?  serverError,TResult Function( _Timeout value)?  timeout,TResult Function( _Other value)?  other,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NoInternet value)?  noInternet,TResult Function( _ServerError value)?  serverError,TResult Function( _Timeout value)?  timeout,TResult Function( _Other value)?  other,TResult Function( _Another value)?  another,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _NoInternet() when noInternet != null:
 return noInternet(_that);case _ServerError() when serverError != null:
 return serverError(_that);case _Timeout() when timeout != null:
 return timeout(_that);case _Other() when other != null:
-return other(_that);case _:
+return other(_that);case _Another() when another != null:
+return another(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return other(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NoInternet value)  noInternet,required TResult Function( _ServerError value)  serverError,required TResult Function( _Timeout value)  timeout,required TResult Function( _Other value)  other,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NoInternet value)  noInternet,required TResult Function( _ServerError value)  serverError,required TResult Function( _Timeout value)  timeout,required TResult Function( _Other value)  other,required TResult Function( _Another value)  another,}){
 final _that = this;
 switch (_that) {
 case _NoInternet():
 return noInternet(_that);case _ServerError():
 return serverError(_that);case _Timeout():
 return timeout(_that);case _Other():
-return other(_that);case _:
+return other(_that);case _Another():
+return another(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return other(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NoInternet value)?  noInternet,TResult? Function( _ServerError value)?  serverError,TResult? Function( _Timeout value)?  timeout,TResult? Function( _Other value)?  other,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NoInternet value)?  noInternet,TResult? Function( _ServerError value)?  serverError,TResult? Function( _Timeout value)?  timeout,TResult? Function( _Other value)?  other,TResult? Function( _Another value)?  another,}){
 final _that = this;
 switch (_that) {
 case _NoInternet() when noInternet != null:
 return noInternet(_that);case _ServerError() when serverError != null:
 return serverError(_that);case _Timeout() when timeout != null:
 return timeout(_that);case _Other() when other != null:
-return other(_that);case _:
+return other(_that);case _Another() when another != null:
+return another(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return other(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  noInternet,TResult Function( Response? response)?  serverError,TResult Function()?  timeout,TResult Function( DioError e)?  other,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  noInternet,TResult Function( Response? response)?  serverError,TResult Function()?  timeout,TResult Function( DioException e)?  other,TResult Function( Object value)?  another,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NoInternet() when noInternet != null:
 return noInternet();case _ServerError() when serverError != null:
 return serverError(_that.response);case _Timeout() when timeout != null:
 return timeout();case _Other() when other != null:
-return other(_that.e);case _:
+return other(_that.e);case _Another() when another != null:
+return another(_that.value);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return other(_that.e);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  noInternet,required TResult Function( Response? response)  serverError,required TResult Function()  timeout,required TResult Function( DioError e)  other,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  noInternet,required TResult Function( Response? response)  serverError,required TResult Function()  timeout,required TResult Function( DioException e)  other,required TResult Function( Object value)  another,}) {final _that = this;
 switch (_that) {
 case _NoInternet():
 return noInternet();case _ServerError():
 return serverError(_that.response);case _Timeout():
 return timeout();case _Other():
-return other(_that.e);case _:
+return other(_that.e);case _Another():
+return another(_that.value);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return other(_that.e);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  noInternet,TResult? Function( Response? response)?  serverError,TResult? Function()?  timeout,TResult? Function( DioError e)?  other,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  noInternet,TResult? Function( Response? response)?  serverError,TResult? Function()?  timeout,TResult? Function( DioException e)?  other,TResult? Function( Object value)?  another,}) {final _that = this;
 switch (_that) {
 case _NoInternet() when noInternet != null:
 return noInternet();case _ServerError() when serverError != null:
 return serverError(_that.response);case _Timeout() when timeout != null:
 return timeout();case _Other() when other != null:
-return other(_that.e);case _:
+return other(_that.e);case _Another() when another != null:
+return another(_that.value);case _:
   return null;
 
 }
@@ -326,7 +332,7 @@ class _Other implements NetworkFailure {
   const _Other({required this.e});
   
 
- final  DioError e;
+ final  DioException e;
 
 /// Create a copy of NetworkFailure
 /// with the given fields replaced by the non-null parameter values.
@@ -358,7 +364,7 @@ abstract mixin class _$OtherCopyWith<$Res> implements $NetworkFailureCopyWith<$R
   factory _$OtherCopyWith(_Other value, $Res Function(_Other) _then) = __$OtherCopyWithImpl;
 @useResult
 $Res call({
- DioError e
+ DioException e
 });
 
 
@@ -378,7 +384,72 @@ class __$OtherCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? e = null,}) {
   return _then(_Other(
 e: null == e ? _self.e : e // ignore: cast_nullable_to_non_nullable
-as DioError,
+as DioException,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Another implements NetworkFailure {
+  const _Another({required this.value});
+  
+
+ final  Object value;
+
+/// Create a copy of NetworkFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AnotherCopyWith<_Another> get copyWith => __$AnotherCopyWithImpl<_Another>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Another&&const DeepCollectionEquality().equals(other.value, value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value));
+
+@override
+String toString() {
+  return 'NetworkFailure.another(value: $value)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AnotherCopyWith<$Res> implements $NetworkFailureCopyWith<$Res> {
+  factory _$AnotherCopyWith(_Another value, $Res Function(_Another) _then) = __$AnotherCopyWithImpl;
+@useResult
+$Res call({
+ Object value
+});
+
+
+
+
+}
+/// @nodoc
+class __$AnotherCopyWithImpl<$Res>
+    implements _$AnotherCopyWith<$Res> {
+  __$AnotherCopyWithImpl(this._self, this._then);
+
+  final _Another _self;
+  final $Res Function(_Another) _then;
+
+/// Create a copy of NetworkFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? value = null,}) {
+  return _then(_Another(
+value: null == value ? _self.value : value ,
   ));
 }
 

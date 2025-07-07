@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meme_editor_app/domain/model/meme.dart';
 import 'package:meme_editor_app/presentation/pages/detail.dart';
 import 'package:meme_editor_app/presentation/pages/edit.dart';
 import 'package:meme_editor_app/presentation/pages/home.dart';
@@ -29,7 +30,9 @@ final GoRouter goRoute = GoRouter(
       path: RouteLocations.detail,
       name: RouteLocationsExtension.detail,
       builder: (context, state) {
-        return Detail();
+        // Extract the meme from the state extra
+        final meme = state.extra as Meme;
+        return Detail(meme: meme);
       },
     ),
     GoRoute(
@@ -37,7 +40,8 @@ final GoRouter goRoute = GoRouter(
       path: RouteLocations.edit,
       name: RouteLocationsExtension.edit,
       builder: (context, state) {
-        return Edit();
+        final meme = state.extra as Meme;
+        return EditProvider(meme: meme);
       },
     ),
   ],
